@@ -19,7 +19,7 @@ tags:
   - multi-agent
   - agentic-ai
   - streamlit
-short_description: Multi-agent SciFi story generation. LSTM → QLoRA → LangGraph.
+short_description: SciFi stories via LSTM → QLoRA → LangGraph agents.
 ---
 
 <div align="center">
