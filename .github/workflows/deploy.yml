@@ -59,12 +59,14 @@ jobs:
         run: |
           git remote add space \
             https://$HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/$HF_USERNAME/scifi-forge
-          # Remove binary files HF Spaces rejects (GIFs, large assets)
-          # The demo GIF lives on GitHub — link to it from the HF Space README instead
+          # HF Spaces rejects binary files anywhere in git history.
+          # Create an orphan branch with only the current tree, minus binaries.
+          git checkout --orphan hf-deploy
           git rm --cached assets/demo.gif 2>/dev/null || true
           git rm --cached checkpoints/ -r 2>/dev/null || true
-          git commit -m "chore: strip binaries for HF Spaces deploy" --allow-empty
-          git push space main --force
+          git rm --cached "*.gif" "*.png" "*.faiss" "*.pkl" 2>/dev/null || true
+          git commit -m "deploy: HF Spaces (binaries stripped)"
+          git push space hf-deploy:main --force
 
       # ── Post-deploy health check ──────────────────────────────────────
       # Polls the Space URL for up to 3 minutes after deploy.
