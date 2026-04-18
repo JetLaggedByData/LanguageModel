@@ -51,7 +51,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM; \
 import torch; \
 tok = AutoTokenizer.from_pretrained('Qwen/Qwen2.5-0.5B-Instruct', trust_remote_code=True); \
 m = AutoModelForCausalLM.from_pretrained('Qwen/Qwen2.5-0.5B-Instruct', \
-    device_map='cpu', dtype=torch.float32, trust_remote_code=True, \
+    device_map='cpu', torch_dtype=torch.float32, trust_remote_code=True, \
     low_cpu_mem_usage=True); \
 print('Model cached successfully')"
 
