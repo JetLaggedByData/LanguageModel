@@ -11,7 +11,6 @@ Features:
 """
 
 import os
-import re
 import sys
 import json
 import time
@@ -23,6 +22,8 @@ import torch
 # ── Path setup ────────────────────────────────────────────────────────────
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.extend([str(ROOT), str(ROOT / "v3_agentic"), str(ROOT / "v1_baseline")])
+
+from agents.utils import trim_to_sentence as _trim_to_sentence
 
 # LITE_MODE=1 is set by the Dockerfile for HF Spaces (CPU-only deployment).
 # In lite mode the page shows Qwen2.5-0.5B on CPU instead of the full GPU pipeline.
@@ -112,14 +113,6 @@ def load_lite_model(model_id: str):
     )
     model.eval()
     return model, tok
-
-
-def _trim_to_sentence(text: str) -> str:
-    text = text.strip()
-    if not text or text[-1] in ".!?\"'":
-        return text
-    matches = list(re.finditer(r'[.!?]["\']?', text))
-    return text[:matches[-1].end()].strip() if matches else text
 
 
 def _last_paragraph(text: str, fallback_chars: int = 300) -> str:

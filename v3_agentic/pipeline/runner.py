@@ -46,8 +46,9 @@ def story_output_path(story_id: str) -> Path:
 
 
 def _thread_id(seed_prompt: str) -> str:
-    """Deterministic thread ID from the seed prompt for checkpoint lookup."""
-    return str(uuid.uuid5(uuid.NAMESPACE_DNS, seed_prompt[:100]))
+    """Unique thread ID per run — deterministic IDs caused LangGraph to resume
+    a prior checkpoint on repeated prompts instead of starting fresh."""
+    return str(uuid.uuid4())
 
 
 # ── Serialisation ─────────────────────────────────────────────────────────

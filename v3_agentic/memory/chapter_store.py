@@ -13,6 +13,7 @@ FAISS index is persisted to disk per story so a crashed run can resume.
 One ChapterMemory instance per story run, keyed by story_id.
 """
 
+import json
 from pathlib import Path
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -21,6 +22,7 @@ from langchain_core.documents import Document
 
 STORIES_DIR   = Path(__file__).resolve().parent.parent.parent / "data/stories"
 EMBED_MODEL   = "sentence-transformers/all-MiniLM-L6-v2"
+DOCS_FILENAME = "faiss_docs.json"   # public-API shadow of FAISS docstore
 
 # How many sentences to extract per chapter for embedding
 CHUNK_SENTENCES = 8
@@ -42,6 +44,7 @@ class ChapterMemory:
         self.story_id  = story_id
         self.index_dir = STORIES_DIR / story_id / "faiss_index"
         self._store: FAISS | None = None
+        self._documents: list[Document] = []   # public-API shadow; avoids ._dict
         self._embeddings = HuggingFaceEmbeddings(
             model_name=EMBED_MODEL,
             model_kwargs={"device": "cpu"},   # always CPU — never waste VRAM on embeddings
@@ -75,19 +78,31 @@ class ChapterMemory:
         return chunks
 
     def _persist(self) -> None:
-        """Save FAISS index to disk."""
+        """Save FAISS index and document shadow list to disk."""
         if self._store is not None:
             self.index_dir.mkdir(parents=True, exist_ok=True)
             self._store.save_local(str(self.index_dir))
+            docs_data = [
+                {"page_content": d.page_content, "metadata": d.metadata}
+                for d in self._documents
+            ]
+            (self.index_dir / DOCS_FILENAME).write_text(json.dumps(docs_data))
 
     def _load_from_disk(self) -> bool:
-        """Load existing FAISS index from disk. Returns True if found."""
+        """Load existing FAISS index and document shadow list. Returns True if found."""
         if (self.index_dir / "index.faiss").exists():
             self._store = FAISS.load_local(
                 str(self.index_dir),
                 self._embeddings,
                 allow_dangerous_deserialization=True,
             )
+            docs_path = self.index_dir / DOCS_FILENAME
+            if docs_path.exists():
+                raw = json.loads(docs_path.read_text(encoding="utf-8"))
+                self._documents = [
+                    Document(page_content=d["page_content"], metadata=d["metadata"])
+                    for d in raw
+                ]
             return True
         return False
 
@@ -110,12 +125,12 @@ class ChapterMemory:
             return
 
         if self._store is None:
-            # Try loading existing index first (resume scenario)
             if not _load_from_disk_safe(self):
                 self._store = FAISS.from_documents(docs, self._embeddings)
         else:
             self._store.add_documents(docs)
 
+        self._documents.extend(docs)
         self._persist()
 
     def get_relevant_context(
@@ -176,39 +191,34 @@ class ChapterMemory:
         if not new_content.strip():
             return
 
-        # Ensure the index is loaded
+        # Ensure the index and shadow document list are loaded
         if self._store is None:
             if not _load_from_disk_safe(self):
-                # No existing index — just add normally
                 self.add_chapter(chapter_num, new_content)
                 return
 
-        # Collect all documents except those belonging to chapter_num
+        # Use the shadow list — avoids the private FAISS ._dict attribute
         remaining_docs = [
-            doc for doc in self._store.docstore._dict.values()
+            doc for doc in self._documents
             if doc.metadata.get("chapter_num") != chapter_num
         ]
 
-        # Build replacement chunks for the revised chapter
         new_docs = self._chunk_chapter(chapter_num, new_content)
-        all_docs  = remaining_docs + new_docs
+        all_docs = remaining_docs + new_docs
 
         if not all_docs:
             return
 
         # Rebuild index from scratch with the filtered + new documents
         self._store = FAISS.from_documents(all_docs, self._embeddings)
+        self._documents = all_docs
         self._persist()
 
     def chapter_count(self) -> int:
         """Return number of unique chapters stored."""
-        if self._store is None:
+        if not self._documents:
             _load_from_disk_safe(self)
-        if self._store is None:
-            return 0
-        # Docstore contains all chunks; count unique chapter_num values
-        docs = self._store.docstore._dict.values()
-        chapters = {d.metadata.get("chapter_num") for d in docs}
+        chapters = {d.metadata.get("chapter_num") for d in self._documents}
         return len(chapters)
 
 

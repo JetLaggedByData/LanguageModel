@@ -8,6 +8,7 @@ VRAM is released even when the node raises, without requiring explicit
 finally blocks in each agent.
 """
 
+import threading
 import torch
 from contextlib import contextmanager
 from pathlib import Path
@@ -21,15 +22,18 @@ DEFAULT_MODEL_ID = "Qwen/Qwen2.5-1.5B-Instruct"
 _ROOT            = Path(__file__).resolve().parent.parent.parent
 ADAPTER_DIR      = _ROOT / "v2_finetuned/adapters"
 
-# Module-level override set by the UI before the pipeline runs.
-# Agents call load_agent_model() with no args and pick this up automatically.
-_active_model_id: str = DEFAULT_MODEL_ID
+# Per-thread model override — each Streamlit session runs in its own thread,
+# so threading.local() isolates concurrent users rather than a shared global.
+_local = threading.local()
 
 
 def set_agent_model(model_id: str) -> None:
     """Called by the Streamlit UI (or CLI) to choose which model powers V3 agents."""
-    global _active_model_id
-    _active_model_id = model_id
+    _local.model_id = model_id
+
+
+def _get_active_model_id() -> str:
+    return getattr(_local, "model_id", DEFAULT_MODEL_ID)
 
 
 @contextmanager
@@ -49,7 +53,7 @@ def load_agent_model(
             output = model.generate(...)
         # VRAM freed here — even if an exception occurred inside the block
     """
-    mid = model_id or _active_model_id
+    mid = model_id or _get_active_model_id()
     use_adapter = (mid == DEFAULT_MODEL_ID) and adapter_dir.is_dir()
 
     tok_source = str(adapter_dir) if use_adapter else mid
@@ -61,7 +65,7 @@ def load_agent_model(
         mid,
         quantization_config=bnb_config(),
         device_map="auto",
-        dtype=torch.float16,
+        torch_dtype=torch.float16,
         trust_remote_code=True,
     )
 
