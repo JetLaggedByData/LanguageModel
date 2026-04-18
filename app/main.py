@@ -129,11 +129,7 @@ with st.sidebar:
     st.divider()
 
     if LITE_MODE:
-        st.info(
-            "🖥️ **CPU mode** — choose from curated open-source models in The Forge.\n\n"
-            "🎬 **Full V3 demo** (4-agent GPU pipeline) — see the About page.",
-            icon="ℹ️",
-        )
+        st.info("Head to **The Forge** to generate your own SciFi story.", icon="🔥")
     else:
         used  = torch.cuda.memory_allocated() / 1e9
         total = torch.cuda.get_device_properties(0).total_memory / 1e9
