@@ -53,7 +53,7 @@ All tools are **100% free** and everything runs on a **single 8GB GPU**.
 
 ## 🎬 Demo
 
-![SciFi Forge — V3 agentic pipeline](assets/demo.gif)
+![SciFi Forge — V3 agentic pipeline](https://raw.githubusercontent.com/JetLaggedByData/LanguageModel/main/assets/demo.gif)
 
 **Live interactive app** (Qwen2.5-0.5B, CPU):
 → [huggingface.co/spaces/JetLaggedByData/scifi-forge](https://huggingface.co/spaces/JetLaggedByData/scifi-forge)
