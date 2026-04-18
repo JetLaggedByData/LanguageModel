@@ -130,7 +130,7 @@ with st.sidebar:
 
     if LITE_MODE:
         st.info(
-            "🖥️ **CPU mode** — Qwen2.5-0.5B.\n\n"
+            "🖥️ **CPU mode** — choose from curated open-source models in The Forge.\n\n"
             "🎬 **Full V3 demo** (4-agent GPU pipeline) — see the About page.",
             icon="ℹ️",
         )
@@ -157,7 +157,7 @@ col1, col2, col3 = st.columns(3)
 col1.metric("Model Versions", "3", "LSTM → QLoRA → Agentic")
 col2.metric("Pipeline Agents", "4", "Plan · Write · Critique · Edit")
 if LITE_MODE:
-    col3.metric("Live Model", "0.5B", "CPU · Qwen2.5-Instruct")
+    col3.metric("Live Model", "CPU", "Select model in The Forge")
 else:
     col3.metric("VRAM Budget", "8 GB", "4-bit QLoRA")
 

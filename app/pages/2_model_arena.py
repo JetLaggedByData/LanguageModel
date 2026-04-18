@@ -216,7 +216,7 @@ with col3:
             ("Stories w/ chapters",str(v3["stories_ok"])),
             ("Chapters written",   str(v3["chapters_total"])),
             ("Total words",        f"{v3['words_total']:,}"),
-            ("LLM backend",        "Qwen2.5-1.5B + V2 LoRA"),
+            ("LLM backend",        "User-selected · default: Qwen2.5-1.5B + LoRA"),
             ("Framework",          "LangGraph"),
             ("Memory",             "FAISS + MiniLM-L6"),
         ]
@@ -279,8 +279,8 @@ with m2:
 with m3:
     st.caption("V3 Agentic — Agents")
     st.dataframe(pd.DataFrame([
-        ("🗺️ Planner", "Qwen2.5-1.5B-Instruct + LoRA", "Generates story bible — title, acts, characters, world rules"),
-        ("✍️ Writer",  "Qwen2.5-1.5B-Instruct + LoRA", "Drafts each chapter using bible + FAISS context"),
-        ("🔍 Critic",  "Qwen2.5-1.5B-Instruct + LoRA", "Scores draft 0–1 on consistency, style, coherence"),
-        ("✏️ Editor",  "Qwen2.5-1.5B-Instruct + LoRA", "Rewrites weak chapters based on Critic instructions"),
+        ("🗺️ Planner", "Selected model (default: Qwen2.5-1.5B + LoRA)", "Generates story bible — title, acts, characters, world rules"),
+        ("✍️ Writer",  "Selected model (default: Qwen2.5-1.5B + LoRA)", "Drafts each chapter using bible + FAISS context"),
+        ("🔍 Critic",  "Selected model (default: Qwen2.5-1.5B + LoRA)", "Scores draft 0–1 on consistency, style, coherence"),
+        ("✏️ Editor",  "Selected model (default: Qwen2.5-1.5B + LoRA)", "Rewrites weak chapters based on Critic instructions"),
     ], columns=["Agent", "Model", "Role"]), hide_index=True, width="stretch")

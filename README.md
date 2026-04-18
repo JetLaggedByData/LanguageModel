@@ -328,8 +328,8 @@ mlflow ui --backend-store-uri mlflow_runs/
 | Component | Tool |
 |---|---|
 | Agent orchestration | LangGraph ≥0.1.0 |
-| Base LLM | Qwen2.5-1.5B-Instruct (4-bit QLoRA) |
-| Lite LLM (deployed) | Qwen2.5-0.5B-Instruct (CPU) |
+| V3 Agent LLM | User-selectable · default: Qwen2.5-1.5B + LoRA adapters |
+| Lite LLM (deployed) | User-selectable CPU models · default: Qwen2.5-0.5B |
 | Fine-tuning | PEFT + bitsandbytes ≥0.10.0 |
 | Chapter embeddings | sentence-transformers/all-MiniLM-L6-v2 |
 | Vector store | FAISS-cpu ≥1.7.4 |
@@ -351,8 +351,9 @@ mlflow ui --backend-store-uri mlflow_runs/
 `bfloat16` compute) with `per_device_train_batch_size=1`, `gradient_checkpointing=True`,
 and `paged_adamw_8bit`. Peak VRAM stays under 6GB, leaving 2GB headroom on an 8GB card.
 
-**Agent model sharing** — all four V3 agents use the same Qwen2.5-1.5B adapter loaded
-once as a singleton. Temperature varies by role: Planner (0.4, structured JSON),
+**Agent model sharing** — all four V3 agents share the same model, loaded once per run
+via a context manager (user-selectable; default: Qwen2.5-1.5B + LoRA adapters). Temperature
+varies by role: Planner (0.4, structured JSON),
 Writer (0.75, creative prose), Critic (0.2, deterministic scoring), Editor (0.65, tight revision).
 
 **Graceful degradation** — every agent wraps generation in `try/except` and returns
@@ -360,7 +361,7 @@ a minimal valid state on failure. The pipeline never hard-crashes; it logs the e
 `state["error"]` and continues, so a single bad chapter doesn't abort a 6-chapter story.
 
 **Deployment split** — full V3 runs locally on GPU and is screen-recorded for the demo
-video. HF Spaces runs the lite app (Qwen2.5-0.5B, CPU) with pre-generated stories and
+video. HF Spaces runs the lite app (user-selectable CPU models, default Qwen2.5-0.5B) with pre-generated stories and
 pre-exported charts committed to the repo, so the deployed app looks rich without any
 GPU inference at runtime.
 

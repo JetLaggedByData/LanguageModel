@@ -38,7 +38,7 @@ if DEMO_VIDEO_URL:
     st.video(DEMO_VIDEO_URL)
     st.divider()
 elif LITE_MODE:
-    st.info("🎬 Full V3 pipeline demo video coming soon. The live app runs Qwen2.5-0.5B on CPU — see The Forge page.")
+    st.info("🎬 Full V3 pipeline demo video coming soon. The live app lets you choose from curated open-source models on CPU — see The Forge page.")
     st.divider()
 
 # ── Interactive architecture + evolution diagram ──────────────────────────

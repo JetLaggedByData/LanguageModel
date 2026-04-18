@@ -2,7 +2,7 @@
 v3_agentic/agents/planner.py
 Planner agent — generates the story bible from the seed prompt.
 
-Uses the fine-tuned V2 model (Qwen2.5-1.5B QLoRA adapters) to produce
+Uses the active agent model (default: Qwen2.5-1.5B + LoRA adapters) to produce
 a structured JSON story bible, then saves it via StoryBible memory.
 
 The story bible is the single source of truth for all subsequent agents:
