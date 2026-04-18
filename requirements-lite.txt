@@ -7,15 +7,17 @@
 #             sentence-transformers, spacy, nltk — none are used in CPU mode.
 
 # ── HuggingFace stack ─────────────────────────────────────────────────────
-transformers>=4.40.0
-accelerate>=0.29.0
+# Pin <5.0 — transformers 5.x requires torch>=2.4 but Docker image ships 2.2
+transformers>=4.40.0,<5.0.0
+accelerate>=0.29.0,<2.0.0
 huggingface-hub>=0.22.0
-tokenizers>=0.19.0
+tokenizers>=0.19.0,<0.21.0
 
 # ── UI & charts ───────────────────────────────────────────────────────────
 streamlit>=1.33.0
 plotly>=5.20.0
 
 # ── Utilities ─────────────────────────────────────────────────────────────
-numpy>=1.26.0
+# Pin <2.0 — numpy 2.x breaks torch 2.2 at import time
+numpy>=1.26.0,<2.0.0
 tqdm>=4.66.0
