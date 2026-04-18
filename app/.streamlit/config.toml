@@ -1,0 +1,20 @@
+# Streamlit server and theme configuration.
+[server]
+port = 7860
+address = "0.0.0.0"
+headless = true
+enableCORS = false
+enableXsrfProtection = false
+fileWatcherType = "none"
+maxUploadSize = 10
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "dark"
+backgroundColor      = "#090e1a"
+secondaryBackgroundColor = "#0f1829"
+primaryColor         = "#00d4ff"
+textColor            = "#c8d8e8"
+font                 = "monospace"

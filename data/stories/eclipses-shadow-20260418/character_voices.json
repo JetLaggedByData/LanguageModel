@@ -1,0 +1,20 @@
+{
+  "Alex": {
+    "profile_text": "Alex is a protagonist. Personality traits: intelligent, resourceful, loyal. Voice and speech style: persuasive and analytical.",
+    "traits": [
+      "intelligent",
+      "resourceful",
+      "loyal"
+    ],
+    "voice_style": "persuasive and analytical"
+  },
+  "Dr. Elara": {
+    "profile_text": "Dr. Elara is a antagonist. Personality traits: ambitious, power-hungry, devious. Voice and speech style: cold and manipulative.",
+    "traits": [
+      "ambitious",
+      "power-hungry",
+      "devious"
+    ],
+    "voice_style": "cold and manipulative"
+  }
+}

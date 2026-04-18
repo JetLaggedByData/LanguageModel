@@ -1,0 +1,20 @@
+{
+  "Luna": {
+    "profile_text": "Luna is a protagonist. Personality traits: resourceful, intelligent, determined.",
+    "traits": [
+      "resourceful",
+      "intelligent",
+      "determined"
+    ],
+    "voice_style": ""
+  },
+  "Draco": {
+    "profile_text": "Draco is a antagonist. Personality traits: power-hungry, corrupt, deceitful.",
+    "traits": [
+      "power-hungry",
+      "corrupt",
+      "deceitful"
+    ],
+    "voice_style": ""
+  }
+}

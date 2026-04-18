@@ -1,0 +1,21 @@
+# requirements-lite.txt
+# HF Spaces (CPU) — lite/CPU mode only.
+# torch is installed separately in the Dockerfile from the CPU wheel index
+# to avoid pip pulling a 3GB CUDA build.
+#
+# Do NOT add: bitsandbytes, tensorflow, langgraph, faiss-cpu,
+#             sentence-transformers, spacy, nltk — none are used in CPU mode.
+
+# ── HuggingFace stack ─────────────────────────────────────────────────────
+transformers>=4.40.0
+accelerate>=0.29.0
+huggingface-hub>=0.22.0
+tokenizers>=0.19.0
+
+# ── UI & charts ───────────────────────────────────────────────────────────
+streamlit>=1.33.0
+plotly>=5.20.0
+
+# ── Utilities ─────────────────────────────────────────────────────────────
+numpy>=1.26.0
+tqdm>=4.66.0

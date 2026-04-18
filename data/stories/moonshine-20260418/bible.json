@@ -1,0 +1,58 @@
+{
+  "title": "Moonshine",
+  "logline": "In the shadow of the moon, a secret war is fought by those who dare to dream.",
+  "acts": [
+    {
+      "act": 1,
+      "summary": "The protagonist discovers an ancient artifact that grants power over the moon.",
+      "chapters": [
+        1,
+        2
+      ]
+    },
+    {
+      "act": 2,
+      "summary": "The protagonist must navigate through treacherous lunar terrain while battling rival factions for control.",
+      "chapters": [
+        3,
+        4
+      ]
+    },
+    {
+      "act": 3,
+      "summary": "The protagonist uncovers a conspiracy involving corrupt lunar officials and international espionage.",
+      "chapters": [
+        5,
+        6
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "name": "Luna",
+      "role": "protagonist",
+      "traits": [
+        "resourceful",
+        "intelligent",
+        "determined"
+      ]
+    },
+    {
+      "name": "Draco",
+      "role": "antagonist",
+      "traits": [
+        "power-hungry",
+        "corrupt",
+        "deceitful"
+      ]
+    }
+  ],
+  "world_rules": [
+    "Artifacts found on the moon cannot be tampered with without severe consequences."
+  ],
+  "technology": [
+    "Lunar Explorer",
+    "Lunar Power Grid"
+  ],
+  "story_id": "moonshine-20260418"
+}

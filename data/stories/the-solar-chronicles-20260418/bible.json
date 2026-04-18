@@ -1,0 +1,60 @@
+{
+  "title": "The Solar Chronicles",
+  "logline": "In the vastness of space, where stars shine bright and lonely, humanity discovers an ancient secret that threatens to destroy all that we hold dear.",
+  "acts": [
+    {
+      "act": 1,
+      "summary": "Astronomers discover anomalies in star patterns that hint at a hidden civilization long ago.",
+      "chapters": [
+        1,
+        2
+      ]
+    },
+    {
+      "act": 2,
+      "summary": "The discovery leads to a race against time as scientists attempt to understand the true nature of the anomalies.",
+      "chapters": [
+        3,
+        4
+      ]
+    },
+    {
+      "act": 3,
+      "summary": "As tensions rise, a group of rebels emerges, determined to uncover the truth before it's too late.",
+      "chapters": [
+        5,
+        6
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "name": "Dr. Elara Voss",
+      "role": "protagonist",
+      "traits": [
+        "intelligent",
+        "determined",
+        "resourceful"
+      ],
+      "voice_style": "Her voice is calm yet analytical."
+    },
+    {
+      "name": "Captain Orion Blackwood",
+      "role": "antagonist",
+      "traits": [
+        "powerful",
+        "ambitious",
+        "calculating"
+      ],
+      "voice_style": "His tone is authoritative and commanding."
+    }
+  ],
+  "world_rules": [
+    "All life forms must adhere to strict cosmic laws regarding energy consumption and waste production to prevent environmental collapse."
+  ],
+  "technology": [
+    "Space Elevator",
+    "Time Travel Device"
+  ],
+  "story_id": "the-solar-chronicles-20260418"
+}

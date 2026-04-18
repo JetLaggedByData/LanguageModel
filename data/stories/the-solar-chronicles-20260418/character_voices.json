@@ -1,0 +1,20 @@
+{
+  "Dr. Elara Voss": {
+    "profile_text": "Dr. Elara Voss is a protagonist. Personality traits: intelligent, determined, resourceful. Voice and speech style: Her voice is calm yet analytical..",
+    "traits": [
+      "intelligent",
+      "determined",
+      "resourceful"
+    ],
+    "voice_style": "Her voice is calm yet analytical."
+  },
+  "Captain Orion Blackwood": {
+    "profile_text": "Captain Orion Blackwood is a antagonist. Personality traits: powerful, ambitious, calculating. Voice and speech style: His tone is authoritative and commanding..",
+    "traits": [
+      "powerful",
+      "ambitious",
+      "calculating"
+    ],
+    "voice_style": "His tone is authoritative and commanding."
+  }
+}

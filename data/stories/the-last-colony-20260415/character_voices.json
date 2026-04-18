@@ -1,0 +1,28 @@
+{
+  "Captain Sarah Johnson": {
+    "profile_text": "Captain Sarah Johnson is a protagonist. Personality traits: resourceful, determined, responsible. Voice and speech style: Commanding yet compassionate.",
+    "traits": [
+      "resourceful",
+      "determined",
+      "responsible"
+    ],
+    "voice_style": "Commanding yet compassionate"
+  },
+  "Dr. Leo Chen": {
+    "profile_text": "Dr. Leo Chen is a antagonist. Personality traits: calculative, ambitious, selfish. Voice and speech style: Ironic and sarcastic.",
+    "traits": [
+      "calculative",
+      "ambitious",
+      "selfish"
+    ],
+    "voice_style": "Ironic and sarcastic"
+  },
+  "Captain Johnathan": {
+    "profile_text": "Captain Johnathan is a protagonist. Personality traits: determined, resourceful. Voice and speech style: Commanding yet compassionate.",
+    "traits": [
+      "determined",
+      "resourceful"
+    ],
+    "voice_style": "Commanding yet compassionate"
+  }
+}

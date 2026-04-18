@@ -1,0 +1,10 @@
+{
+  "model": "V2_QLoRA_Qwen2.5-1.5B",
+  "adapter_dir": "/home/urmila/PycharmProjects/LanguageModel/v2_finetuned/adapters",
+  "n_eval_samples": 100,
+  "word_perplexity": 34.7736,
+  "bleu2": 0.0153,
+  "bleu4": 0.0056,
+  "inference_tokens_per_sec": 36.17,
+  "genre_consistency_score": 0.0
+}

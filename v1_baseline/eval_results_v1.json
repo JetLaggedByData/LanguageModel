@@ -1,0 +1,8 @@
+{
+  "model": "V1_LSTM_PyTorch",
+  "checkpoint": "checkpoints/lstm_checkpoints/checkpt_best.pt",
+  "char_perplexity": 2.9674,
+  "bleu2": 0.6812,
+  "inference_chars_per_sec": 4628.68,
+  "avg_sentence_length_chars": 165.33
+}

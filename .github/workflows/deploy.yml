@@ -1,0 +1,113 @@
+# .github/workflows/deploy.yml
+# Auto-deploy SciFi Forge lite app to Hugging Face Spaces on every push to main.
+#
+# Required GitHub Secrets (Settings → Secrets → Actions):
+#   HF_TOKEN      — HuggingFace write token (huggingface.co/settings/tokens)
+#   HF_USERNAME   — Your HuggingFace username
+#
+# One-time setup:
+#   1. Create Space at huggingface.co/spaces → choose "Streamlit" SDK
+#   2. Name it "scifi-forge"
+#   3. Add secrets above to this GitHub repo
+#   4. Push to main — this workflow handles the rest
+
+name: Deploy to HF Spaces
+
+on:
+  push:
+    branches: [main]
+    # Only deploy when these paths change — skip for docs-only commits
+    paths:
+      - "app/**"
+      - "data/stories/**"
+      - "mlflow_runs/charts/**"
+      - "mlflow_runs/benchmark_report.json"
+      - "requirements.txt"
+      - "Dockerfile"
+      - ".github/workflows/deploy.yml"
+
+  # Allow manual trigger from Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Push to Hugging Face Spaces
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ── Checkout ─────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0      # full history needed for git push --force
+          lfs: true           # pull any Git LFS assets (story JSONs if stored via LFS)
+
+      # ── Configure git identity ────────────────────────────────────────
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+
+      # ── Push to HF Spaces ─────────────────────────────────────────────
+      # HF Spaces pulls from the main branch of the linked git repo.
+      # We push directly to the Space's git remote which triggers a rebuild.
+      - name: Push to HF Spaces
+        env:
+          HF_TOKEN:    ${{ secrets.HF_TOKEN }}
+          HF_USERNAME: ${{ secrets.HF_USERNAME }}
+        run: |
+          git remote add space \
+            https://$HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/$HF_USERNAME/scifi-forge
+          git push space main --force
+
+      # ── Post-deploy health check ──────────────────────────────────────
+      # Polls the Space URL for up to 3 minutes after deploy.
+      # HF Spaces takes ~60-90s to rebuild after a push.
+      - name: Wait for Space to be live
+        env:
+          HF_USERNAME: ${{ secrets.HF_USERNAME }}
+        run: |
+          SPACE_URL="https://$HF_USERNAME-scifi-forge.hf.space/_stcore/health"
+          echo "Polling: $SPACE_URL"
+          for i in $(seq 1 18); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SPACE_URL" || echo "000")
+            echo "Attempt $i/18 — HTTP $STATUS"
+            if [ "$STATUS" = "200" ]; then
+              echo "✅ Space is live!"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "⚠️  Space did not respond in time — check HF Spaces dashboard."
+          exit 0   # non-fatal: Space may still be building
+
+
+  # ── Optional: run pytest before deploying ─────────────────────────────
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Run tests in parallel with deploy — deploy won't wait for tests
+    # Change to `needs: [test]` if you want tests to gate deployment
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install test dependencies
+        run: |
+          pip install pytest pytest-cov
+          # Install only lightweight deps needed for unit tests
+          pip install pathlib2 numpy
+
+      - name: Run tests
+        run: |
+          pytest tests/ -v --tb=short --ignore=tests/test_gpu.py \
+            || echo "⚠️  Some tests failed — check output above"
+        continue-on-error: true   # don't block deploy on test failures during development

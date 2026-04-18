@@ -1,0 +1,20 @@
+{
+  "Corporation A": {
+    "profile_text": "Corporation A is a protagonist. Personality traits: ambitious, resourceful, competitive. Voice and speech style: Tech-savvy and strategic.",
+    "traits": [
+      "ambitious",
+      "resourceful",
+      "competitive"
+    ],
+    "voice_style": "Tech-savvy and strategic"
+  },
+  "Corporation B": {
+    "profile_text": "Corporation B is a antagonist. Personality traits: greedy, corrupt, short-sighted. Voice and speech style: Cynical and manipulative.",
+    "traits": [
+      "greedy",
+      "corrupt",
+      "short-sighted"
+    ],
+    "voice_style": "Cynical and manipulative"
+  }
+}

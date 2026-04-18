@@ -1,0 +1,19 @@
+{
+  "Elena": {
+    "profile_text": "Elena is a protagonist. Personality traits: determined, resourceful, loyal. Voice and speech style: Confident and strategic.",
+    "traits": [
+      "determined",
+      "resourceful",
+      "loyal"
+    ],
+    "voice_style": "Confident and strategic"
+  },
+  "Dr. Marcus": {
+    "profile_text": "Dr. Marcus is a antagonist. Personality traits: calculative, devious. Voice and speech style: Sly and cunning.",
+    "traits": [
+      "calculative",
+      "devious"
+    ],
+    "voice_style": "Sly and cunning"
+  }
+}

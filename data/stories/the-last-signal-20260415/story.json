@@ -1,0 +1,70 @@
+{
+  "title": "The Last Signal",
+  "logline": "A desperate crew on a dying colony ship uncovers a mysterious signal that could save humanity.",
+  "acts": [
+    {
+      "act": 1,
+      "summary": "The crew receives the signal, but it's too late to save the colony ship.",
+      "chapters": [
+        1,
+        2
+      ]
+    },
+    {
+      "act": 2,
+      "summary": "The crew struggles to understand the nature of the signal while trying to find a way out of their doomed situation.",
+      "chapters": [
+        3,
+        4
+      ]
+    },
+    {
+      "act": 3,
+      "summary": "The crew deduces the signal is from another civilization, leading them to believe there might be hope for humanity.",
+      "chapters": [
+        5,
+        6
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "name": "Captain Sarah Johnson",
+      "role": "protagonist",
+      "traits": [
+        "determined",
+        "resourceful",
+        "responsible"
+      ],
+      "voice_style": "professional and authoritative"
+    },
+    {
+      "name": "Dr. Leo Chen",
+      "role": "antagonist",
+      "traits": [
+        "ambitious",
+        "selfish",
+        "deceitful"
+      ],
+      "voice_style": "confident and condescending"
+    },
+    {
+      "name": "Liam",
+      "role": "supporting character",
+      "traits": [
+        "loyal",
+        "intelligent",
+        "inquisitive"
+      ],
+      "voice_style": "quirky and quick-witted"
+    }
+  ],
+  "world_rules": [
+    "All life forms must survive at all costs."
+  ],
+  "technology": [
+    "Sentry Drone",
+    "Time Travel Device"
+  ],
+  "story_id": "the-last-signal-20260415"
+}

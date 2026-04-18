@@ -1,0 +1,60 @@
+{
+  "title": "Eclipse's Shadow",
+  "logline": "In a world where eclipses have mystical powers, two unlikely allies must unite to prevent an ancient prophecy from being fulfilled.",
+  "acts": [
+    {
+      "act": 1,
+      "summary": "The protagonist discovers the power of eclipses, while the antagonist seeks their own dark agenda.",
+      "chapters": [
+        1,
+        2
+      ]
+    },
+    {
+      "act": 2,
+      "summary": "The protagonists embark on a journey to understand the true nature of eclipses, encountering various obstacles along the way.",
+      "chapters": [
+        3,
+        4
+      ]
+    },
+    {
+      "act": 3,
+      "summary": "As the protagonists learn more about eclipses, they realize that the eclipse is not just a natural phenomenon but also holds immense potential for both good and evil.",
+      "chapters": [
+        5,
+        6
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "name": "Alex",
+      "role": "protagonist",
+      "traits": [
+        "intelligent",
+        "resourceful",
+        "loyal"
+      ],
+      "voice_style": "persuasive and analytical"
+    },
+    {
+      "name": "Dr. Elara",
+      "role": "antagonist",
+      "traits": [
+        "ambitious",
+        "power-hungry",
+        "devious"
+      ],
+      "voice_style": "cold and manipulative"
+    }
+  ],
+  "world_rules": [
+    "An eclipse can only occur when the moon and sun align perfectly."
+  ],
+  "technology": [
+    "Eclipse Shield",
+    "Eclipse Engine"
+  ],
+  "story_id": "eclipses-shadow-20260418"
+}

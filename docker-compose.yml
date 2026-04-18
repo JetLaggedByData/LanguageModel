@@ -1,0 +1,80 @@
+# docker-compose.yml
+# Local development and testing convenience wrapper.
+#
+# Usage:
+#   docker compose up --build          # build + run lite app
+#   docker compose up app-full         # run full app (requires GPU)
+#   docker compose down                # stop
+
+services:
+
+  # ── Lite app (CPU — matches HF Spaces deployment) ────────────────────
+  app-lite:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: scifi-forge:lite
+    container_name: scifi-forge-lite
+    ports:
+      - "7860:7860"
+    volumes:
+      # Mount data and mlflow_runs so generated stories persist outside container
+      - ./data/stories:/app/data/stories
+      - ./mlflow_runs:/app/mlflow_runs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_HUB_DISABLE_SYMLINKS_WARNING=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7860/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s    # allow time for model download on first run
+
+  # ── Full app (GPU — local only, not deployed) ─────────────────────────
+  app-full:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: scifi-forge:full
+    container_name: scifi-forge-full
+    ports:
+      - "8501:7860"
+    volumes:
+      - ./data:/app/data
+      - ./mlflow_runs:/app/mlflow_runs
+      - ./v2_finetuned/adapters:/app/v2_finetuned/adapters
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LITE_MODE=0   # override the Dockerfile default so GPU pipeline is active
+      - LD_LIBRARY_PATH=/app/.venv/lib/python3.12/site-packages/nvidia/cu13/lib
+    # GPU passthrough — requires nvidia-container-toolkit
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: >
+      streamlit run app/main.py
+      --server.port=7860
+      --server.address=0.0.0.0
+      --server.fileWatcherType=none
+    profiles:
+      - gpu    # only starts with: docker compose --profile gpu up app-full
+
+  # ── MLflow tracking UI ────────────────────────────────────────────────
+  mlflow:
+    image: python:3.10-slim
+    container_name: scifi-forge-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlflow_runs:/mlruns
+    command: >
+      bash -c "pip install mlflow --quiet &&
+               mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri /mlruns"
+    profiles:
+      - mlflow    # start with: docker compose --profile mlflow up mlflow

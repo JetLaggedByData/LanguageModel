@@ -1,0 +1,73 @@
+{
+  "v1": {
+    "v1_char_perplexity": 2.9674,
+    "v1_bleu2": 0.6812,
+    "v1_inference_chars_per_sec": 4628.68,
+    "v1_avg_sentence_length": 165.33
+  },
+  "v2": {
+    "v2_word_perplexity": 34.7736,
+    "v2_bleu2": 0.0153,
+    "v2_bleu4": 0.0056,
+    "v2_inference_tokens_per_sec": 36.17,
+    "v2_genre_consistency_score": 0.0
+  },
+  "v3": {
+    "v3_avg_consistency_score": 0.8588,
+    "v3_avg_revision_cycles": 0.4,
+    "v3_score_mean": 0.8588,
+    "v3_score_median": 0.963,
+    "v3_score_stdev": 0.145,
+    "v3_chapters_excellent": 3,
+    "v3_chapters_good": 2,
+    "v3_chapters_poor": 0
+  },
+  "deltas": {
+    "perplexity_pct_change": 1071.9,
+    "bleu2_pct_change": -97.8
+  },
+  "per_story": [
+    {
+      "story_id": "chronos-echoes-20260415",
+      "title": "Chrono's Echoes",
+      "chapters": 1,
+      "avg_score": 0.9655,
+      "error_rate": 0.0
+    },
+    {
+      "story_id": "europas-echoes-20260415",
+      "title": "Europa's Echoes",
+      "chapters": 1,
+      "avg_score": 0.7,
+      "error_rate": 0.0
+    },
+    {
+      "story_id": "marss-last-hope-20260415",
+      "title": "Mars's Last Hope",
+      "chapters": 1,
+      "avg_score": 0.9655,
+      "error_rate": 0.0
+    },
+    {
+      "story_id": "the-last-colony-20260415",
+      "title": "The Last Colony",
+      "chapters": 1,
+      "avg_score": 0.963,
+      "error_rate": 0.0
+    },
+    {
+      "story_id": "the-last-signal-20260415",
+      "title": "The Last Signal",
+      "chapters": 0,
+      "avg_score": null,
+      "error_rate": 0.0
+    },
+    {
+      "story_id": "venuss-descent-20260415",
+      "title": "Venus's Descent",
+      "chapters": 1,
+      "avg_score": 0.7,
+      "error_rate": 0.0
+    }
+  ]
+}

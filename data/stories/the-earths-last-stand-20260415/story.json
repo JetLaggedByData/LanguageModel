@@ -1,0 +1,59 @@
+{
+  "title": "The Earth's Last Stand",
+  "logline": "In the face of an alien invasion, humanity must unite to survive.",
+  "acts": [
+    {
+      "act": 1,
+      "summary": "The world is invaded by aliens, and humanity is on the brink of extinction.",
+      "chapters": [
+        1,
+        2
+      ]
+    },
+    {
+      "act": 2,
+      "summary": "A group of survivors forms an alliance to find a way back home.",
+      "chapters": [
+        3,
+        4
+      ]
+    },
+    {
+      "act": 3,
+      "summary": "They discover a hidden portal that could lead them back through time.",
+      "chapters": [
+        5,
+        6
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "name": "Elena",
+      "role": "protagonist",
+      "traits": [
+        "determined",
+        "resourceful",
+        "loyal"
+      ],
+      "voice_style": "Confident and strategic"
+    },
+    {
+      "name": "Dr. Marcus",
+      "role": "antagonist",
+      "traits": [
+        "calculative",
+        "devious"
+      ],
+      "voice_style": "Sly and cunning"
+    }
+  ],
+  "world_rules": [
+    "Time travel is impossible due to the Earth's unique magnetic field."
+  ],
+  "technology": [
+    "Chrono-Engine",
+    "Alien Technology"
+  ],
+  "story_id": "the-earths-last-stand-20260415"
+}

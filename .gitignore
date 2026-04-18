@@ -1,0 +1,108 @@
+# ── Python ────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+pip-wheel-metadata/
+.installed.cfg
+lib/
+lib64/
+.eggs/
+
+# ── Virtual Environments ──────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ── Jupyter ───────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── Model Weights & Checkpoints (large binaries — never commit) ───────────
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.keras
+v1_baseline/checkpoints/
+v2_finetuned/adapters/
+
+# ── FAISS Index (regenerate from corpus) ──────────────────────────────────
+data/faiss_index/
+
+# ── Raw Corpus (149MB — too large for git) ────────────────────────────────
+data/raw/
+
+# ── Generated JSONL Dataset (reproducible via prepare_dataset.py) ─────────
+data/chunks/
+
+# ── Pre-generated Stories (KEEP — committed intentionally for deployed app)
+# data/stories/ is NOT ignored — these are committed to repo
+
+# ── MLflow & Experiment Artifacts ─────────────────────────────────────────
+# Ignore raw MLflow run data (large, regenerable) but keep pre-exported assets
+# that the deployed HF Spaces app reads directly.
+mlruns/
+mlflow_runs/**
+!mlflow_runs/charts/
+!mlflow_runs/charts/**
+!mlflow_runs/benchmark_report.json
+*.mlflow
+
+# ── Streamlit Cache ───────────────────────────────────────────────────────
+.streamlit/secrets.toml
+
+# ── Environment & Secrets ─────────────────────────────────────────────────
+.env
+.env.*
+*.secret
+secrets.json
+
+# ── OS ────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# ── IDEs ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.project
+.pydevproject
+
+# ── Logs & Temp ───────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+tmp/
+temp/
+
+# ── Test & Coverage ───────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ── MLflow local SQLite DB (regenerable) ─────────────────────────────────
+mlflow.db
+
+# ── CUDA / GPU ────────────────────────────────────────────────────────────
+*.ncu-rep
