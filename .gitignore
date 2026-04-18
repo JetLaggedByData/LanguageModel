@@ -59,6 +59,7 @@ data/chunks/
 # Ignore raw MLflow run data (large, regenerable) but keep pre-exported assets
 # that the deployed HF Spaces app reads directly.
 mlruns/
+mlflow_runs/mlruns/
 mlflow_runs/**
 !mlflow_runs/charts/
 !mlflow_runs/charts/**

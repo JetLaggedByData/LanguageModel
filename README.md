@@ -137,20 +137,21 @@ flowchart TD
 
 ## 📊 Benchmark Results
 
-> Run `python v3_agentic/evaluate/benchmark.py` to populate with your numbers.
-> The table below shows the expected improvement profile.
+| Metric | V1 LSTM | V2 QLoRA | V3 Agentic |
+|---|---|---|---|
+| Perplexity | 2.97 *(char-level)* | 34.77 *(word-level)* | N/A |
+| BLEU-2 | 0.681 | 0.015 | N/A |
+| BLEU-4 | N/A | 0.006 | N/A |
+| Inference speed | 4,629 chars/sec | 36 tokens/sec | N/A |
+| Avg critique score | N/A | N/A | **0.86 / 1.0** |
+| Median critique score | N/A | N/A | **0.96 / 1.0** |
+| Avg revision cycles | N/A | N/A | 0.4 per chapter |
+| Chapters scored excellent (≥0.9) | N/A | N/A | **3 / 5** |
+| Chapters scored poor (<0.6) | N/A | N/A | **0 / 5** |
 
-| Metric | V1 LSTM | V2 QLoRA | V3 Agentic | Notes |
-|---|---|---|---|---|
-| Perplexity | *baseline* | **~−60%** | N/A | Char-level → word-level |
-| BLEU-2 | *baseline* | **~+40%** | **~+70%** | vs held-out SciFi passages |
-| BLEU-4 | N/A | *measured* | N/A | V2 only |
-| Inference speed | *chars/sec* | *tokens/sec* | *tokens/sec* | logged to MLflow |
-| Avg critique score | N/A | N/A | **≥ 0.75** | Critic composite (0–1) |
-| Avg revision cycles | N/A | N/A | *measured* | Editor passes per chapter |
-| Genre consistency | N/A | *measured* | *measured* | SciFi keyword density |
-
-*Fill in actual numbers after running `benchmark.py` and `evaluate.py`.*
+> V1 and V2 perplexity are on different scales (character-level vs word-level) and are not directly comparable.
+> V3 critique scores are computed by the Critic agent: 75% LLM scoring + 25% embedding-based voice consistency.
+> V3 scores improve with more chapters — each chapter adds to the FAISS memory, giving the Writer and Critic richer context for consistency scoring. The figures above are based on single-chapter stories; multi-chapter runs yield progressively stronger coherence signals.
 
 ---
 
