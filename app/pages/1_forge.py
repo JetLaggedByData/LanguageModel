@@ -106,7 +106,7 @@ def load_lite_model(model_id: str):
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     model = AutoModelForCausalLM.from_pretrained(
-        model_id, device_map="cpu", dtype=torch.float32,
+        model_id, device_map="cpu", torch_dtype=torch.float32,
         trust_remote_code=True, low_cpu_mem_usage=True, token=hf_token,
     )
     model.eval()
