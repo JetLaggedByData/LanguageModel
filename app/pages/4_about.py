@@ -38,7 +38,7 @@ if DEMO_VIDEO_URL:
     st.video(DEMO_VIDEO_URL)
     st.divider()
 elif LITE_MODE:
-    st.info("🎬 Full V3 pipeline demo video coming soon. The live app lets you choose from curated open-source models on CPU — see The Forge page.")
+    st.info("Head to **The Forge** to generate your own SciFi story.")
     st.divider()
 
 # ── Interactive architecture + evolution diagram ──────────────────────────
