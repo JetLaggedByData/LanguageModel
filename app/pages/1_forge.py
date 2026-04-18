@@ -37,6 +37,7 @@ CURATED_MODELS: dict[str, dict] = {
     "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B":    {"ram_gb": 3.0,  "gated": False},
     "microsoft/Phi-3.5-mini-instruct":               {"ram_gb": 7.0,  "gated": False},
     "meta-llama/Llama-3.2-1B-Instruct":             {"ram_gb": 2.5,  "gated": True},
+    "google/gemma-2-2b-it":                          {"ram_gb": 4.5,  "gated": True},
     "custom": {"ram_gb": None, "gated": False},
 }
 
